@@ -10,7 +10,7 @@ const articleSchema = new mongoose.Schema({
   },
   markdown: {
     type: String,
-    require: true,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -20,3 +20,4 @@ const articleSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Article', articleSchema)
+//in blog db, we create Article table with all these columns,

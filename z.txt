@@ -6,3 +6,50 @@ npm i -D nodemon
 bootstrap
  index.ejs
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+
+
+
+
+----------------------------------------------------------
+
+mongosh command    
+
+
+mongosh --help
+show dbs
+use blog
+db.dropDatabase()
+
+cls  //clear screen
+exit
+
+db
+db.users.insertOne({name: 'John'})     
+   //user is collection, pass in an object
+db.users.find()
+   //[ { _id: ObjectId("64d4b6c52060baa4cf3a05a8"), name: 'John' } ]
+
+//every single object in a collection is called document
+
+//db => collection => document
+
+db.users.insertOne({ name: 'Sally', age: 19, address: { street: '98 North St'}, hobbies: ['Running'] })
+
+db.users.find()
+
+db.users.insertMany([{ name: 'Jill' }, { name: 'Mike' }])
+
+db.users.find().limit(2)   //first 2 results in the db
+
+db.users.find().sort({ name: 1}).limit(2)     
+    //sort by name: 1 alphabetical  name: -1 reverse
+
+db.user.find().sort({ age: 1 , name: -1 }).limit(2)
+    //if 2 people has the same age, then sort them in name reverse order 
+
+10:28---
+MongoDB Crash Course   webdevsimplified
+
+
+---------------------------------------------------------
