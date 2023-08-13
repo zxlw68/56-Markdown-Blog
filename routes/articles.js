@@ -1,5 +1,6 @@
 const express = require('express')
 const Article = require('./../models/article') // use db model schema
+const { trusted } = require('mongoose')
 const router = express.Router()
 
 router.get('/new', (req, res) => {
@@ -8,8 +9,12 @@ router.get('/new', (req, res) => {
   // pass in blank default article
 })
 
-router.get('/:id', (req, res) => {
-  res.send(req.params.id)
+router.get('/:id', async (req, res) => {
+  const article = await Article.findById(req.params.id)
+  if (article == null) res.redirect('/')
+  res.render('articles/show', { article: article })
+  // res.send(req.params.id)
+  // url params,  params[:id] is meant to be the string that uniquely identifies a (RESTful) resource
 })
 
 // /articles/
@@ -25,6 +30,7 @@ router.post('/', async (req, res) => {
   try {
     article = await article.save()
     // async, update article = , this will gave us an id of the article by mongodb, in blog  db articles collection
+    // console.log(article.id)
     res.redirect(`/articles/${article.id}`)
     //  route created above
   } catch (e) {

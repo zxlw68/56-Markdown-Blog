@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Article = require('./models/article')
 const articleRouter = require('./routes/articles')
 const app = express()
 
@@ -13,23 +14,28 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false })) // option
 // access all the different parameter in article form inside the article route, eg. req.body.markdown
 
-app.get('/', (req, res) => {
-  const articles = [
-    {
-      title: 'test Article',
-      createdAt: new Date(),
-      description: 'Test description',
-    },
-    {
-      title: 'test Article 2',
-      createdAt: new Date(),
-      description: 'Test description 2',
-    },
-  ]
+app.get('/', async (req, res) => {
+  // const articles = [
+  //   {
+  //     title: 'test Article',
+  //     createdAt: new Date(),
+  //     description: 'Test description',
+  //   },
+  //   {
+  //     title: 'test Article 2',
+  //     createdAt: new Date(),
+  //     description: 'Test description 2',
+  //   }
+  // ]
+
+  const articles = await Article.find().sort({ createdAt: 'desc' })
+  // give every single article
+  // time descending order
 
   res.render('articles/index', { articles: articles })
   // pass articles to the view  views/articles/index.ejs
 })
+
 app.use('/articles', articleRouter)
 
 app.listen(5000)

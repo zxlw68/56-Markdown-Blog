@@ -9,6 +9,17 @@ bootstrap
 
 
 
+42:00 use slug, blog title fits in the url to replace params:id, modify model/article.js
+
+npm i marked slugify
+
+marked create markdown, turn it to html
+slugify convert title into a url friendly slug
+
+
+
+
+
 
 
 ----------------------------------------------------------
@@ -53,3 +64,6 @@ MongoDB Crash Course   webdevsimplified
 
 
 ---------------------------------------------------------
+
+
+42:00
