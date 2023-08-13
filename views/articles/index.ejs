@@ -27,6 +27,15 @@
           <a href="articles/<%= article.slug %>" class="btn btn-primary"
             >Read More</a
           >
+          <!-- normally a link should be <a href="">, but thats a GET route, when google crawl the site, it  will delete everything in the db. so here we use form.    ?_method=DELETE    using method override
+             -->
+          <form
+            action="/articles/<%= article.id %>?_method=DELETE"
+            method="POST"
+            class="d-inline"
+          >
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
         </div>
       </div>
       <% }) %>

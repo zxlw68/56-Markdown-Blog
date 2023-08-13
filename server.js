@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false })) // option
 // access all the different parameter in article form inside the article route, eg. req.body.markdown
 
 app.use(methodOverride('_method'))
+// used in index.ejs delete button
 
 app.get('/', async (req, res) => {
   // const articles = [
