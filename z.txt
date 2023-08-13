@@ -14,7 +14,13 @@ bootstrap
 npm i marked slugify
 
 marked create markdown, turn it to html
-slugify convert title into a url friendly slug
+slugify convert title into a url friendly slugify
+
+
+
+48:50 form only allows GET or POST, use delete as a method for form, install library method-override
+
+npm i method-override
 
 
 

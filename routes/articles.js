@@ -9,8 +9,14 @@ router.get('/new', (req, res) => {
   // pass in blank default article
 })
 
-router.get('/:id', async (req, res) => {
-  const article = await Article.findById(req.params.id)
+// router.get('/:id', async (req, res) => {
+//   const article = await Article.findById(req.params.id)
+router.get('/:slug', async (req, res) => {
+  const article = await Article.findOne({ slug: req.params.slug })
+  // console.log(article)
+
+  //find() returs array,  findOne({}) return single article.
+
   if (article == null) res.redirect('/')
   res.render('articles/show', { article: article })
   // res.send(req.params.id)
@@ -31,7 +37,7 @@ router.post('/', async (req, res) => {
     article = await article.save()
     // async, update article = , this will gave us an id of the article by mongodb, in blog  db articles collection
     // console.log(article.id)
-    res.redirect(`/articles/${article.id}`)
+    res.redirect(`/articles/${article.slug}`)
     //  route created above
   } catch (e) {
     // if title or markdown is not specified
@@ -39,6 +45,11 @@ router.post('/', async (req, res) => {
     res.render('articles/new', { article: article })
     // prefill the form  in /_form_fields
   }
+})
+
+router.delete('/:id', async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id)
+  res.redurect('/')
 })
 
 module.exports = router
