@@ -9,6 +9,11 @@ router.get('/new', (req, res) => {
   // pass in blank default article
 })
 
+router.get('/edit/:id', async (req, res) => {
+  const article = await Article.findById(req.params.id)
+  res.render('articles/edit', { article: article })
+})
+
 // router.get('/:id', async (req, res) => {
 //   const article = await Article.findById(req.params.id)
 router.get('/:slug', async (req, res) => {
@@ -47,9 +52,33 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  put(req, res)
+})
+
 router.delete('/:id', async (req, res) => {
   await Article.findByIdAndDelete(req.params.id)
   res.redirect('/')
 })
+
+const put = async (req, res) => {
+  let article = await Article.findById(req.params.id)
+  article.title = req.body.title
+  article.description = req.body.description
+  article.markdown = req.body.description
+
+  try {
+    article = await article.save()
+    // async, update article = , this will gave us an id of the article by mongodb, in blog  db articles collection
+    // console.log(article.id)
+    res.redirect(`/articles/${article.slug}`)
+    //  route created above
+  } catch (e) {
+    // if title or markdown is not specified
+    console.log(e)
+    res.render('articles/new', { article: article, e: e })
+    // prefill the form  in /_form_fields
+  }
+}
 
 module.exports = router
