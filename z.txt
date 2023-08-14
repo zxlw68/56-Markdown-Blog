@@ -9,19 +9,26 @@ bootstrap
 
 
 
-42:00 use slug, blog title fits in the url to replace params:id, modify model/article.js
+// 42:00 use slug, blog title fits in the url to replace params:id, modify model/article.js
 
 npm i marked slugify
 
-marked create markdown, turn it to html
+// marked create markdown, turn it to html
 slugify convert title into a url friendly slugify
 
 
 
-48:50 form only allows GET or POST, use delete as a method for form, install library method-override
+// 48:50 form only allows GET or POST, use delete as a method for form, install library method-override
 
 npm i method-override
 
+
+
+51:35 convert markdown to html, sanitize the html, to avoid people adding malicios code in markdown
+
+npm i dompurify jsdom    
+
+//jsdom is the requirement of dompurify, which allows us to use render html inside nodejs, used in models/article.js
 
 
 

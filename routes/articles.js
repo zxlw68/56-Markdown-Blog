@@ -4,7 +4,7 @@ const { trusted } = require('mongoose')
 const router = express.Router()
 
 router.get('/new', (req, res) => {
-  res.render('articles/new', { article: new Article() })
+  res.render('articles/new', { article: new Article(), e: null })
   // on server render,  /articles/new
   // pass in blank default article
 })
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
   } catch (e) {
     // if title or markdown is not specified
     console.log(e)
-    res.render('articles/new', { article: article })
+    res.render('articles/new', { article: article, e: e })
     // prefill the form  in /_form_fields
   }
 })
